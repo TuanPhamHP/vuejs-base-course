@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- this is vue element -->
+    <div id="root">
+      <div class="container">
+        <div class="row mx-0">
+          <div class="col-6">
+            <div>
+              <p>{{replaceBlankMethods(message)}}</p>
+              <p>{{replaceBlankComputed}}</p>
+            </div>
+            <!-- UX || UI -->
+            <form @submit="onSubmit">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="text" v-model="form.username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+
+                <div v-if="error.username" class="alert alert-danger" role="alert">{{error.username}}</div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input :type="ableToSee ? 'text' : 'password'" v-model="form.password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                <button class="btn btn-success" @click="togglePasswordType">
+                  <img v-if="ableToSee" width="30px" height="30px" src="https://image.flaticon.com/icons/png/512/65/65000.png" alt="" />
+                  <img
+                    v-else
+                    width="30px"
+                    height="30px"
+                    src="https://w7.pngwing.com/pngs/687/84/png-transparent-visible-spectrum-computer-icons-light-invisibility-eye-slash-logo-human-eye-desktop-wallpaper-thumbnail.png"
+                    alt=""
+                  />
+                </button>
+                <small id="emailHelp" class="form-text text-muted">ít nhất 6 kí tự không có khoảng trắng</small>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" v-model="form.policy" class="form-check-input" id="exampleCheck1" />
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                <small id="emailHelp" class="form-text text-muted">bắt buộc phải check</small>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <!-- <label for="ip1">xe</label>
+              <input type="checkbox" v-model="checkboxList" id="ip1" value="ip1" />
+              <label for="ip2">xe2</label>
+              <input type="checkbox" v-model="checkboxList" id="ip2" value="ip2" /> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="./vueDemo.js"></script>
+  <script src="./main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+  ></script>
+</html>
+<!-- JSX -->
