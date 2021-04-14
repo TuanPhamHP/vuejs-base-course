@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- this is vue element -->
+    <h2>Lesson 4 : computed</h2>
+    <div id="root">
+      <div class="container">
+        <div class="row mx-0">
+          <div class="col-6">
+            <p>{{name}} có trạng thái là :{{getCurrentStatus}}</p>
+            <p>Status có độ là :{{getTextLength}}</p>
+            <!-- {{computed(_p1)}} -->
+            <input type="number" v-model="bill" @keyup.enter="onSubmitBill" />
+            <p>
+              Tiền tip : ${{getCurrentTipAmount}} <br />
+              Tổng : ${{+bill + +getCurrentTipAmount}} <br />
+              Đã bao gồm {{getCurrentTipPercent + '%'}} tip : ${{getCurrentTipAmount}}
+            </p>
+          </div>
+          <div class="col-6">
+            <h3>List bill detail</h3>
+            <div>
+              <div v-for="bill in listBills">
+                <p>{{bill.amount}}</p>
+                <!-- <p>
+                  Tiền tip : ${{bill.tipAmount}} <br />
+                  Tổng : ${{+bill.tipAmount + +bill.amount}} <br />
+                  Đã bao gồm {{bill.tipPercent + '%'}} tip : ${{bill.tipAmount}}
+                </p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="./vueDemo.js"></script>
+  <script src="./main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+  ></script>
+</html>
+<!-- JSX -->
