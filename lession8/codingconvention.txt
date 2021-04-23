@@ -1,0 +1,16 @@
+CODING CONVENTION 
+-----------------
+* Components Name : PascalCase
+* Function/Methods/Module Name : camelCase 
+* Function/Methods/Module name prefix : 
+  - ['can','has','is'] to function that return boolean . 
+  - 'get' for function which help to claim data and return value.
+  - 'set' for function which help to save data .
+  - 'handle' for function which use for handling actions .
+  - 'toggle' for function which use to toggling value between values (usally boolean).
+* Sumary all api in api factories . 
+  - Comments type of params with every single api .
+* All components must seprate by their purpose . Ex : ModalEmpty is Shared components -> should be create at Components/Shared
+* Using slot as much as possible with shared components .
+  - Define props as a Object type, not Array .
+* Vue filter are invalid to use . Computed is optimize solution if developers need to change data .
