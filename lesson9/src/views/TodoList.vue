@@ -42,6 +42,7 @@
 </template>
 
 <script>
+  import { tStr } from "validation_t/src";
   // l1 : search local - search phía client
   // l2 : search sever
   // watching data
@@ -107,6 +108,9 @@
     components: {
       TaskList,
     },
+    created() {
+      console.log(this.$store, "from todolist components");
+    },
     watch: {
       //  c1 : methods --- key : fn()
       textQuery(newValue, oldValue) {
@@ -148,6 +152,11 @@
           console.log(this.listCounter);
         },
       },
+    },
+    mounted() {
+      const a = "Điệp";
+      const b = tStr.removeAscent(a);
+      console.log(b.includes("diep"));
     },
     methods: {
       handleSubmit() {
@@ -272,6 +281,7 @@
         index === -1 ? this.cateQuery.push(event.target.value) : this.cateQuery.splice(index, 1);
 
         console.log(this.cateQuery);
+        // VUEX
       },
     },
   };

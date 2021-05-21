@@ -3,7 +3,11 @@
     <div v-for="task in todoList" :key="task.id" class="alert col-xl-4 col-lg-6 col-md-6" :class="task.status === 1 ? 'alert-primary' : 'alert-success'" role="alert">
       <p class="title font-weight-bold mb-2">{{ task.title }} - {{ getCateById(task.category) }}</p>
       <span class="timmer">{{ parseDate(task.created_at) }}</span>
+      <button class="btn btn-info" @click="setNewAvatar">Click me to force state change</button>
+      <p>Created by: {{ userInit.name }}</p>
+      <img :src="avatarUser" alt="" />
       <p class="content-p mt-3">{{ task.content }}</p>
+
       <div class="button-group">
         <!-- <button type="button" class="btn btn-success" @click="updateTask('finish', task)">
           {{ task.status === 1 ? "Hoàn Thành" : "Đặt lại" }}
@@ -24,12 +28,34 @@
   // D2 : từ con -> cha
 
   import { tDate } from "validation_t/src";
+  import { mapState } from "vuex";
+
   export default {
     props: ["todoList", "categories", "handleFinishTask", "handleUpdateTask"],
     data() {
-      return {};
+      return {
+        avatar: "",
+      };
+    },
+    computed: {
+      ...mapState({
+        avatarUser: state => state.avatar,
+        userInit: state => state.userInit,
+        listProductByIds: state => state.products.listProductByIds,
+      }),
+      counterComputed() {
+        return Math.random();
+      },
+    },
+    mounted() {
+      console.log(this.$store, " store");
     },
     methods: {
+      setNewAvatar() {
+        // https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2020/10/meme-hai-huoc-moi-nhat-142-696x385.jpg?fit=696%2C20000&quality=95&ssl=1
+        console.log("https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2020/10/meme-hai-huoc-moi-nhat-142-696x385.jpg?fit=696%2C20000&quality=95&ssl=1");
+        // this.$store.state.avatar = "";
+      },
       parseDate(_date) {
         // default - optional
         let txt = "";
@@ -57,6 +83,7 @@
       },
     },
   };
+  // CRUD
 </script>
 
 <style></style>
