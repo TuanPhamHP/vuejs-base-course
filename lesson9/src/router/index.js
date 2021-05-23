@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Lesson from "../views/LessonToday.vue";
 import TodoList from "../views/TodoList.vue";
+import PostList from "../views/PostList.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -28,6 +29,11 @@ const routes = [
     path: "/todo",
     name: "To Do",
     component: TodoList,
+  },
+  {
+    path: "/posts",
+    name: "Post",
+    component: PostList,
   },
 ];
 

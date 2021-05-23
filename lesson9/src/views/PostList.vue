@@ -6,41 +6,18 @@
 
  -->
   <div class="container">
-    <p>{{ myText }}</p>
     <div class="form-group search-bar">
       <input v-model="formQuery.textQuery" type="text" class="form-control bg-white box-3d" placeholder="Tìm kiếm nhanh ghi chú của bạn" />
     </div>
     <div class="form-group search-bar row">
-      <div class="col-6">
-        <label for="title" class="label-for-input font-weight-bold text-left d-block">Tiêu đề</label>
-        <input id="title" v-model="formData.title" type="text" class="form-control bg-white box-3d" placeholder="Tiêu đề" />
-      </div>
-      <div class="col-6">
-        <label class="label-for-input font-weight-bold text-left d-block">Danh mục</label>
-        <select v-model="selectedCate" class="custom-select mb-3 box-3d">
-          <option v-for="(item, idx) in categories" :key="idx" :value="item.id">{{ item.text }}</option>
-        </select>
-      </div>
-      <div class="col-12">
-        <label for="content" class="label-for-input font-weight-bold text-left d-block">Nội dung</label>
-        <textarea id="content" v-model="formData.content" class="form-control bg-white box-3d" rows="3" placeholder="Nội dung"></textarea>
-      </div>
       <div class="col-12 mt-3">
-        <button type="button" class="btn btn-success w-100" @click="handleSubmit" :disabled="loadingBtn">Thêm mới</button>
+        <button type="button" class="btn btn-success w-100" @click="getPost" :disabled="loadingBtn">Lấy data</button>
       </div>
-      <div class="col-12 mt-3 d-flex align-items-center">
-        <div v-for="(item, idx) in categories" :key="idx" :value="item.id">
-          <input type="checkbox" v-model="formQuery.cateQuery" :value="item.id" :id="`cate-${item.id}`" />
-          <label :for="`cate-${item.id}`" class="mb-0 mr-3">{{ item.text }}</label>
-        </div>
-      </div>
+
       <div class="taskList mt-4 col-12">
-        <TaskList :todo-list="filterList || todoList" :categories="categories" :handle-finish-task="handleFinishTask" :handle-update-task="handleUpdateTask" @handleUpdateText="setText" />
+        <ShitPost :todo-list="filterList || todoList" :categories="categories" :handle-finish-task="handleFinishTask" :handle-update-task="handleUpdateTask" @handleUpdateText="setText" />
       </div>
     </div>
-    <p class="mb-2 text-center">Counter from store: {{ counter }}</p>
-    <button class="btn btn-info" @click="handleRandomCounter">Random Counter</button>
-    <p>{{ name }}</p>
   </div>
 </template>
 
@@ -53,7 +30,7 @@
   // 1 : search nhưng xài computed
   // 2 : improve search module - 1 : không phân biệt hoa thường . 2 : giảm số lần search
   // 3 : tạo components để lọc theo categories - lọc kiểu &&
-  import TaskList from "@/components/Shared/TaskList";
+  import ShitPost from "@/components/Shared/ShitPost";
   export default {
     data() {
       return {
@@ -110,7 +87,7 @@
     },
     // watching data / subscribe
     components: {
-      TaskList,
+      ShitPost,
     },
     computed: {
       ...mapState({
@@ -289,27 +266,42 @@
           cateQuery: [],
         };
       },
-      handleCurrentCateFilter(event) {
-        let index = this.cateQuery.findIndex(o => {
-          return o === event.target.value;
-        });
-        index === -1 ? this.cateQuery.push(event.target.value) : this.cateQuery.splice(index, 1);
 
-        console.log(this.cateQuery);
-        // VUEX
-      },
-      handleRandomCounter() {
-        // console.log(this.$store.commit);
-        // this.$store.commit("SETCOUNTER", Math.random()); // call - với mutations
-        const payload = {
-          type: Math.random() > 0.5 ? "increase" : "decrease",
-          value: Math.random(),
-        };
-        // this.$store.dispatch("SETCOUNTER", payload); // call - với actions
-        this.setcounter(payload); // call - với actions
-
-        // type : định nghĩa mutation mà dev đang muốn gọi đến.
-        // payload : biến đầu vào || body || params.
+      // fetching data
+      getPost() {
+        const data = { id: 1 };
+        // const response = null;
+        // RESTFUL API : GET, POST, PUT, DELETE
+        // Status code : mã trạng thái -
+        // 200 : success
+        // 3xx : navigate
+        // 4xx : 400, 401, 404 . => lỗi từ phía user (lỗi của FE).
+        // 5xx : => lỗi từ phía severs.
+        // CORS : không vượt được rào.
+        fetch("https://jsonplaceholder.typicode.com/todos/1", {
+          method: "GET", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "same-origin", // include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+          params: JSON.stringify(data), // body data type must match "Content-Type" header
+        })
+          .then(
+            res => {
+              return res.json();
+            },
+            err => {
+              console.log(err);
+            }
+          )
+          .then(res2 => {
+            console.log(res2);
+          });
       },
     },
   };

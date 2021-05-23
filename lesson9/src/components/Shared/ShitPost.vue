@@ -54,9 +54,7 @@
     },
     methods: {
       setNewAvatar() {
-        // https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2020/10/meme-hai-huoc-moi-nhat-142-696x385.jpg?fit=696%2C20000&quality=95&ssl=1
         console.log("https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2020/10/meme-hai-huoc-moi-nhat-142-696x385.jpg?fit=696%2C20000&quality=95&ssl=1");
-        // this.$store.state.avatar = "";
       },
       parseDate(_date) {
         // default - optional
