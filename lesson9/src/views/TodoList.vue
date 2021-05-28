@@ -34,6 +34,7 @@
           <label :for="`cate-${item.id}`" class="mb-0 mr-3">{{ item.text }}</label>
         </div>
       </div>
+      <p>Now: {{ parseDateToDMY(date) }}</p>
       <div class="taskList mt-4 col-12">
         <TaskList :todo-list="filterList || todoList" :categories="categories" :handle-finish-task="handleFinishTask" :handle-update-task="handleUpdateTask" @handleUpdateText="setText" />
       </div>
@@ -45,6 +46,7 @@
 </template>
 
 <script>
+  import parseDate from "../mixins/parseDate";
   import { mapState, mapActions, mapGetters } from "vuex";
   import { tStr } from "validation_t/src";
   // l1 : search local - search phía client
@@ -57,6 +59,7 @@
   export default {
     data() {
       return {
+        date: new Date(),
         categories: [
           {
             id: 1,
@@ -108,6 +111,7 @@
         // vd a = { a:"1"} -> a = {a:"2"} || a = { a: "1"} -> a.a = "2" . deep watch,
       };
     },
+    mixins: [parseDate],
     // watching data / subscribe
     components: {
       TaskList,

@@ -13,9 +13,14 @@
       <div class="col-12 mt-3">
         <button type="button" class="btn btn-success w-100" @click="getPost" :disabled="loadingBtn">Lấy data</button>
       </div>
-
+      <p>Now: {{ parseDateToDMY(date) }}</p>
+      <div v-html="msg"></div>
       <div class="taskList mt-4 col-12">
-        <ShitPost :todo-list="filterList || todoList" :categories="categories" :handle-finish-task="handleFinishTask" :handle-update-task="handleUpdateTask" @handleUpdateText="setText" />
+        <ShitPost :list-data="listData" />
+
+        <div>
+          <p v-if="errMessageReponse">{{ errMessageReponse }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -24,6 +29,8 @@
 <script>
   import { mapState, mapActions, mapGetters } from "vuex";
   import { tStr } from "validation_t/src";
+  import parseDate from "../mixins/parseDate";
+  // import axios from "axios";
   // l1 : search local - search phía client
   // l2 : search sever
   // watching data
@@ -34,6 +41,8 @@
   export default {
     data() {
       return {
+        msg: "hello kitty", // innerHTML
+        date: new Date(), // dd-mm-yyyy
         categories: [
           {
             id: 1,
@@ -79,12 +88,12 @@
           cateQuery: [],
         },
         listCounter: [{ a: 1 }],
-        refQuery: null, // coi như 1 cái cờ (flag)
-        // string number boolean  thì thay đổi nghĩa là giá trị thay đổi vd : 1 -> 2
-        // Object, array  ... thì thay đổi nghĩa là địa chỉ ô nhớ thay đổi. shallow watch
-        // vd a = { a:"1"} -> a = {a:"2"} || a = { a: "1"} -> a.a = "2" . deep watch,
+        refQuery: null,
+        listData: [],
+        errMessageReponse: "",
       };
     },
+    mixins: [parseDate],
     // watching data / subscribe
     components: {
       ShitPost,
@@ -149,7 +158,6 @@
       ...mapActions({
         setcounter: "SETCOUNTER",
       }),
-
       handleSubmit() {
         this.loadingBtn = true;
         let params = { ...this.formData }; // spread ES6
@@ -268,43 +276,25 @@
       },
 
       // fetching data
-      getPost() {
-        const data = { id: 1 };
-        // const response = null;
-        // RESTFUL API : GET, POST, PUT, DELETE
-        // Status code : mã trạng thái -
-        // 200 : success
-        // 3xx : navigate
-        // 4xx : 400, 401, 404 . => lỗi từ phía user (lỗi của FE).
-        // 5xx : => lỗi từ phía severs.
-        // CORS : không vượt được rào.
-        fetch("https://jsonplaceholder.typicode.com/todos/1", {
-          method: "GET", // *GET, POST, PUT, DELETE, etc.
-          mode: "cors", // no-cors, *cors, same-origin
-          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-          credentials: "same-origin", // include, *same-origin, omit
-          headers: {
-            "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          redirect: "follow", // manual, *follow, error
-          referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-          params: JSON.stringify(data), // body data type must match "Content-Type" header
-        })
-          .then(
-            res => {
-              return res.json();
-            },
-            err => {
-              console.log(err);
-            }
-          )
-          .then(res2 => {
-            console.log(res2);
-          });
+      // getPost() {
+      //   this.errMessageReponse = "";
+      //   console.log(process.env.VUE_APP_BASE_URL);
+      //   axios.get("https://api.imgflip.com/get_memes").then(response => console.log(response.data));
+      // },
+      async getPost() {
+        const response = await this.$api.meme.getAll();
+        console.log(response);
       },
     },
   };
+
+  // 1 call api
+  // success : push data,
+
+  // fail :
+  // 1 : thông báo bằng snackbar. -> nút, hành động thay đổi dữ liệu (C,U,D)
+  // 2 : Thông báo tại components. -> bảng biểu. khi data không hợp lệ, 4xx , 5xx
+  // v-directive
 </script>
 
 <style>
