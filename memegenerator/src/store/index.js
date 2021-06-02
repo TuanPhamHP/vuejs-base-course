@@ -6,10 +6,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     image: [],
+    selectedImage: null,
   },
   mutations: {
     SETIMAGE(state, payload) {
       state.image = payload;
+    },
+    SETSELECTEDIMAGE(state, payload) {
+      state.selectedImage = payload;
     },
   },
   actions: {

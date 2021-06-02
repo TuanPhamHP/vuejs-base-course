@@ -3,6 +3,15 @@
     Home Works
     <p>{{ onProgress ? "Đang đợi Api" : " Đã xong api" }}</p>
     <p>Hiện nay data đang có {{ listImage ? listImage.length : 0 }} ảnh</p>
+    <div class="row">
+      <div class="img-wr col-3 py-2" v-for="image in listImage.slice(-40)" :key="image.id">
+        <img :src="image.url" :alt="image.name" class="w-100" @click="handleSelectImage(image)" />
+      </div>
+    </div>
+
+    <div v-if="onLoadingPage">
+      <h1>Loading</h1>
+    </div>
   </div>
 </template>
 
@@ -15,8 +24,9 @@
     components: {},
     data() {
       return {
-        listImage: null,
+        listImage: [],
         onProgress: false,
+        onLoadingPage: false,
       };
     },
     created() {
@@ -50,10 +60,35 @@
       async getAllImage() {
         const body = { id: 1, val: "c" };
         this.onProgress = true;
+
+        this.onLoadingPage = true;
         const response = await this.$api.image.getAll(body);
-        console.log(response);
+        this.onLoadingPage = false;
+
+        if (!response) {
+          return;
+        }
+        try {
+          if (response.status >= 400) {
+            // code xu li loi
+            return;
+          }
+          this.listImage = [...response.data.data.memes];
+        } catch (error) {
+          console.log(error);
+        }
       },
+
       // env
+      // handleNavigateTo(`/image/${image.id}`)
+      handleNavigateTo(_url) {
+        // this.$router.push(_url + `?name=${null}&age=`);
+        this.$router.push(_url);
+      },
+      handleSelectImage(_image) {
+        // this.$store.commit("SETSELECTEDIMAGE", _image);
+        this.handleNavigateTo(`/image/${_image.id}`);
+      },
     },
   };
 </script>

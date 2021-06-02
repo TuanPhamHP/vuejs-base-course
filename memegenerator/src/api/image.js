@@ -1,9 +1,10 @@
 const BASE_URL = process.env.VUE_APP_BASE_URL;
+// https://cors-anywhere.herokuapp.com/
 export default axios => ({
-  getAll(_params = {}) {
+  getAll(query = {}) {
     return axios
       .get(`${BASE_URL}/get_memes`, {
-        params: _params,
+        params: query,
       })
       .then(
         res => {
@@ -16,7 +17,8 @@ export default axios => ({
     // chỉ trả về 1 request . luôn là promise
   },
   createNewImage(_params) {
-    return axios.post("https://api.imgflip.com/get_memes", _params).then(
+    // post | put
+    return axios.post(`${BASE_URL}/caption_image`, _params).then(
       res => {
         return res;
       },
