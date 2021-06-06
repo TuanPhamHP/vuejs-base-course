@@ -18,13 +18,22 @@ export default axios => ({
   },
   createNewImage(_params) {
     // post | put
-    return axios.post(`${BASE_URL}/caption_image`, _params).then(
-      res => {
-        return res;
-      },
-      err => {
-        return err;
-      }
-    );
+    return axios
+      .post(`${BASE_URL}/caption_image`, _params, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Credentials": "true",
+          "Access-Control-Allow-Methods": "POST",
+        },
+      })
+      .then(
+        res => {
+          return res;
+        },
+        err => {
+          return err;
+        }
+      );
   },
 });

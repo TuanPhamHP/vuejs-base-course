@@ -2,6 +2,7 @@
   <div class="home">
     Home Works
     <p>{{ onProgress ? "Đang đợi Api" : " Đã xong api" }}</p>
+    <Pagination :handle-change-page="handleChangePage" :handle-change-per-pages="handleChangePerPage" :pagination="pagination"></Pagination>
     <p>Hiện nay data đang có {{ listImage ? listImage.length : 0 }} ảnh</p>
     <div class="row">
       <div class="img-wr col-3 py-2" v-for="image in listImage.slice(-40)" :key="image.id">
@@ -19,14 +20,25 @@
   //  created vs mounted -- là lifecycle hooks
   //  tìm hiểu về fecthData vs data
   // import axios from "axios";
+  import { Pagination } from "@/components/Shared";
   export default {
     name: "Home",
-    components: {},
+    components: {
+      Pagination,
+    },
     data() {
       return {
         listImage: [],
         onProgress: false,
         onLoadingPage: false,
+        pagination: {
+          count: 0,
+          current_page: 1,
+          links: {},
+          per_page: 15,
+          total: 0,
+          total_pages: 100,
+        },
       };
     },
     created() {
@@ -88,6 +100,23 @@
       handleSelectImage(_image) {
         // this.$store.commit("SETSELECTEDIMAGE", _image);
         this.handleNavigateTo(`/image/${_image.id}`);
+      },
+      handleChangePerPage(_val) {
+        console.log(_val);
+        this.pagination = {
+          ...this.pagination,
+          per_page: _val,
+          current_page: 1,
+          page: 1,
+        };
+      },
+      handleChangePage(_val) {
+        console.log(_val);
+        this.pagination = {
+          ...this.pagination,
+          current_page: _val,
+          page: _val,
+        };
       },
     },
   };

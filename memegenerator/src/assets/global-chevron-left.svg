@@ -1,0 +1,15 @@
+<svg id="global_chevron-left" data-name="global/chevron-left" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6.576" height="11.18" viewBox="0 0 6.576 11.18">
+  <defs>
+    <clipPath id="clip-path"/>
+    <clipPath id="clip-path-2">
+      <path id="Shape" d="M.293,4.883,4.886.29a.99.99,0,0,1,1.4,1.4l-3.9,3.9,3.9,3.9a.99.99,0,0,1-1.4,1.4L.293,6.3a1,1,0,0,1,0-1.414Z" transform="translate(8.712 6.112)" fill="#808890"/>
+    </clipPath>
+  </defs>
+  <path id="Shape-2" data-name="Shape" d="M.293,4.883,4.886.29a.99.99,0,0,1,1.4,1.4l-3.9,3.9,3.9,3.9a.99.99,0,0,1-1.4,1.4L.293,6.3a1,1,0,0,1,0-1.414Z" fill="#808890"/>
+  <g id="Group_20410" data-name="Group 20410" transform="translate(-8.712 -6.112)" clip-path="url(#clip-path-2)">
+    <g id="_Color" data-name="↳ 🎨Color">
+      <rect id="_Color_background" data-name="↳ 🎨Color background" width="24" height="24" fill="#808890"/>
+      <path id="N70" d="M0,24H24V0H0Z" fill="#808890"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6.576" height="11.18" viewBox="0 0 6.576 11.18">
+  <defs>
+    <clipPath id="clip-path"/>
+    <clipPath id="clip-path-2">
+      <path id="Shape" d="M-.293,4.883-4.886.29a.99.99,0,0,0-1.4,0,.99.99,0,0,0,0,1.4l3.9,3.9-3.9,3.9a.99.99,0,0,0,0,1.4.99.99,0,0,0,1.4,0L-.293,6.3a1,1,0,0,0,0-1.414Z" transform="translate(8.712 -6.112) rotate(180)" fill="#808890"/>
+    </clipPath>
+  </defs>
+  <g id="global_chevron-left" data-name="global/chevron-left" transform="translate(6.576 11.18) rotate(180)">
+    <path id="Shape-2" data-name="Shape" d="M-.293,4.883-4.886.29a.99.99,0,0,0-1.4,0,.99.99,0,0,0,0,1.4l3.9,3.9-3.9,3.9a.99.99,0,0,0,0,1.4.99.99,0,0,0,1.4,0L-.293,6.3a1,1,0,0,0,0-1.414Z" transform="translate(0 11.18) rotate(180)" fill="#808890"/>
+    <g id="Group_20408" data-name="Group 20408" transform="translate(-8.712 17.292)" clip-path="url(#clip-path-2)">
+      <g id="_Color" data-name="↳ 🎨Color">
+        <rect id="_Color_background" data-name="↳ 🎨Color background" width="24" height="24" transform="translate(24) rotate(180)" fill="#808890"/>
+        <path id="N500" d="M0,24H-24V0H0Z" transform="rotate(180)" fill="#808890"/>
+      </g>
+    </g>
+  </g>
+</svg>
