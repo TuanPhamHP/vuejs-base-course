@@ -56,6 +56,9 @@
         this.$router.push(_route);
       },
     },
+    mounted() {
+      console.log(this);
+    },
   };
 </script>
 

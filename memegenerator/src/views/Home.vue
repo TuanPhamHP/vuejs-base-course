@@ -4,6 +4,15 @@
     <p>{{ onProgress ? "Đang đợi Api" : " Đã xong api" }}</p>
     <Pagination :handle-change-page="handleChangePage" :handle-change-per-pages="handleChangePerPage" :pagination="pagination"></Pagination>
     <p>Hiện nay data đang có {{ listImage ? listImage.length : 0 }} ảnh</p>
+    <p>hello directive</p>
+    <p v-errorMsg>đây là msg lỗi</p>
+    <input type="text" placeholder="Số tiền ủng hộ" />
+    <!-- 
+      directive chỉ cho nhập số | chỉ cho nhập số dương
+      tự động parse currency khi nhập
+     -->
+    <p>Tổng giá tiền của đơn hàng là: <span v-currency.afterward="' đ'">68595839485</span></p>
+    <p>Tổng giá tiền của đơn hàng là: <span v-currency.prefix="'$ '">68595839485</span></p>
     <div class="row">
       <div class="img-wr col-3 py-2" v-for="image in listImage.slice(-40)" :key="image.id">
         <img :src="image.url" :alt="image.name" class="w-100" @click="handleSelectImage(image)" />
