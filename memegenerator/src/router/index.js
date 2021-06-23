@@ -4,7 +4,16 @@ import Home from "../views/Home.vue";
 import image from "../views/image.vue";
 import Login from "../views/Login.vue";
 import Post from "../views/Post.vue";
+import isAuth from "../middleware/index.js"; // spread, rest
 Vue.use(VueRouter);
+
+// tạm coi middleware như 1 function.
+// được hiểu tạm như 1 function sẽ được gọi đến ở giữa của 1 proccess nào đó.
+
+// truớc khi vào route : beforeEnter  login state, permission state ....
+// đã vào route
+// rời khỏi route
+// life cycle
 
 const routes = [
   {
@@ -40,11 +49,23 @@ const routes = [
     path: "/post",
     name: "Post",
     component: Post,
+    beforeEnter: (to, from, next) => {
+      // console.log(isAuth);
+      const token = isAuth();
+      if (token) {
+        next();
+      } else {
+        alert("ban co chac khong"); // blocking fn
+        next(false);
+      }
+    },
   },
 ];
-
+// Route history
 const router = new VueRouter({
   routes,
 });
 
 export default router;
+
+// const hooksList = ['b4Enter','b4Leave','b4Change']
